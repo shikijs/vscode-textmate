@@ -3,18 +3,17 @@
  *--------------------------------------------------------*/
 
 import { BalancedBracketSelectors, StateStackImpl } from './grammar';
-// import * as grammarReader from './parseRawGrammar';
 import { IOnigLib } from './onigLib';
 import { IRawGrammar } from './rawGrammar';
 import { SyncRegistry } from './registry';
 import { IRawTheme, ScopeName, Theme } from './theme';
 import { StandardTokenType } from './encodedTokenAttributes';
 import { ScopeDependencyProcessor } from './grammar/grammarDependencies'
-import { applyStateStackDiff, diffStateStacksRefEq, StackDiff } from './diffStateStacks';
+import { StackDiff } from './diffStateStacks';
 
 export * from './onigLib';
 
-export type { IRawThemeSetting } from './theme'
+export type { Theme, IRawThemeSetting } from './theme'
 export type { StateStackImpl, StackDiff }
 export type { IRawGrammar, IRawTheme };
 
@@ -266,7 +265,3 @@ export interface StateStack {
 }
 
 export const INITIAL: StateStack = StateStackImpl.NULL;
-
-// export const parseRawGrammar: (content: string, filePath?: string) => IRawGrammar = grammarReader.parseRawGrammar;
-
-// export { diffStateStacksRefEq, applyStateStackDiff,  };
