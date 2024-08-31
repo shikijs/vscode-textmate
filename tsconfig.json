@@ -13,6 +13,9 @@
 			"es2015.promise"
 		]
 	},
+	"include": [
+		"src"
+	],
 	"exclude": [
 		"node_modules",
 		"release",

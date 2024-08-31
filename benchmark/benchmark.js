@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const main = require('../release/main');
 const onigLibs = require('../out/tests/onigLibs');
+const { parseRawGrammar } = require('../out/parseRawGrammar');
 
 const Registry = main.Registry;
 
@@ -43,7 +44,7 @@ function loadGrammar(scopeName) {
 	} else {
 		return null;
 	}
-	return Promise.resolve(main.parseRawGrammar(fs.readFileSync(grammarPath).toString(), grammarPath));
+	return Promise.resolve(parseRawGrammar(fs.readFileSync(grammarPath).toString(), grammarPath));
 }
 
 async function test() {
