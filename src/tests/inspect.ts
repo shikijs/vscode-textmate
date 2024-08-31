@@ -22,19 +22,23 @@ if (process.argv.length < 4) {
 const GRAMMAR_PATHS = process.argv.slice(2, process.argv.length - 1);
 const FILE_PATH = process.argv[process.argv.length - 1];
 
-const registry = new Registry({
-	onigLib: getOniguruma(),
-	loadGrammar: () => Promise.resolve(null)
-});
-let grammarPromises: Promise<IGrammar>[] = [];
-for (let path of GRAMMAR_PATHS) {
-	console.log('LOADING GRAMMAR: ' + path);
-	const content = fs.readFileSync(path).toString();
-	const rawGrammar = parseRawGrammar(content, path);
-	grammarPromises.push(registry.addGrammar(rawGrammar));
-}
+const promise = (async () => {
+	const registry = new Registry({
+		onigLib: await getOniguruma(),
+		loadGrammar: () => null,
+	});
+	return {
+		registry,
+		grammars: GRAMMAR_PATHS.map(path => {
+			console.log('LOADING GRAMMAR: ' + path);
+			const content = fs.readFileSync(path).toString();
+			const rawGrammar = parseRawGrammar(content, path);
+			return registry.addGrammar(rawGrammar)
+		})
+	}
+})()
 
-Promise.all(grammarPromises).then(_grammars => {
+promise.then(({ grammars: _grammars }) => {
 	const grammar = _grammars[0];
 	const fileContents = fs.readFileSync(FILE_PATH).toString();
 	const lines = fileContents.split(/\r\n|\r|\n/);

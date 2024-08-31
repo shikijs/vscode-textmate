@@ -5,7 +5,7 @@
 import { BalancedBracketSelectors, createGrammar, Grammar, IGrammarRepository, IThemeProvider, AttributedScopeStack } from './grammar';
 import { IRawGrammar } from './rawGrammar';
 import { IGrammar, IEmbeddedLanguagesMap, ITokenTypeMap } from './main';
-import { ScopeStack, Theme, StyleAttributes, ThemeTrieElementRule, ScopeName } from './theme';
+import { ScopeStack, Theme, StyleAttributes, ScopeName } from './theme';
 import { IOnigLib } from './onigLib';
 
 export class SyncRegistry implements IGrammarRepository, IThemeProvider {
@@ -14,7 +14,7 @@ export class SyncRegistry implements IGrammarRepository, IThemeProvider {
 	private readonly _injectionGrammars = new Map<ScopeName, ScopeName[]>();
 	private _theme: Theme;
 
-	constructor(theme: Theme, private readonly _onigLibPromise: Promise<IOnigLib>) {
+	constructor(theme: Theme, private readonly _onigLib: IOnigLib) {
 		this._theme = theme;
 	}
 
@@ -74,13 +74,13 @@ export class SyncRegistry implements IGrammarRepository, IThemeProvider {
 	/**
 	 * Lookup a grammar.
 	 */
-	public async grammarForScopeName(
+	public grammarForScopeName(
 		scopeName: ScopeName,
 		initialLanguage: number,
 		embeddedLanguages: IEmbeddedLanguagesMap | null,
 		tokenTypes: ITokenTypeMap | null,
 		balancedBracketSelectors: BalancedBracketSelectors | null
-	): Promise<IGrammar | null> {
+	): IGrammar | null {
 		if (!this._grammars.has(scopeName)) {
 			let rawGrammar = this._rawGrammars.get(scopeName)!;
 			if (!rawGrammar) {
@@ -94,7 +94,7 @@ export class SyncRegistry implements IGrammarRepository, IThemeProvider {
 				tokenTypes,
 				balancedBracketSelectors,
 				this,
-				await this._onigLibPromise
+				this._onigLib
 			));
 		}
 		return this._grammars.get(scopeName)!;

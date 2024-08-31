@@ -59,8 +59,8 @@ function assertTokenizationSuite(testLocation: string): void {
 		}
 
 		let options: RegistryOptions = {
-			onigLib: onigLib,
-			loadGrammar: (scopeName: string) => Promise.resolve(grammarByScope[scopeName]),
+			onigLib: await onigLib,
+			loadGrammar: (scopeName: string) => grammarByScope[scopeName],
 			getInjections: (scopeName: string) => {
 				if (scopeName === grammarScopeName) {
 					return test.grammarInjections;
@@ -68,7 +68,7 @@ function assertTokenizationSuite(testLocation: string): void {
 			}
 		};
 		let registry = new Registry(options);
-		let grammar: IGrammar | null = await registry.loadGrammar(grammarScopeName);
+		let grammar: IGrammar | null = registry.loadGrammar(grammarScopeName);
 		if (!grammar) {
 			throw new Error('I HAVE NO GRAMMAR FOR TEST');
 		}

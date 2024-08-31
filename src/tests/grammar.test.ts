@@ -106,9 +106,9 @@ test('StackElementMetadata can work at max values', () => {
 });
 
 test.skip('Shadowed rules are resolved correctly', async function () {
-	const registry = new Registry({ loadGrammar: async () => undefined, onigLib: getOniguruma() });
+	const registry = new Registry({ loadGrammar: () => undefined, onigLib: await getOniguruma() });
 	try {
-		const grammar = await registry.addGrammar({
+		const grammar = registry.addGrammar({
 			scopeName: 'source.test',
 			repository: {
 				$base: undefined!,

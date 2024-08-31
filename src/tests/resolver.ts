@@ -21,7 +21,7 @@ export interface IGrammarRegistration {
 	scopeName: string;
 	path: string;
 	embeddedLanguages: { [scopeName: string]: string; };
-	grammar?: Promise<IRawGrammar>;
+	grammar?: IRawGrammar;
 }
 
 export class Resolver implements RegistryOptions {
@@ -30,12 +30,12 @@ export class Resolver implements RegistryOptions {
 	private _id2language: string[];
 	private readonly _grammars: IGrammarRegistration[];
 	private readonly _languages: ILanguageRegistration[];
-	public readonly onigLib: Promise<IOnigLib>;
+	public readonly onigLib: IOnigLib;
 
-	constructor(grammars: IGrammarRegistration[], languages: ILanguageRegistration[], onigLibPromise: Promise<IOnigLib>) {
+	constructor(grammars: IGrammarRegistration[], languages: ILanguageRegistration[], onigLib: IOnigLib) {
 		this._grammars = grammars;
 		this._languages = languages;
-		this.onigLib = onigLibPromise;
+		this.onigLib = onigLib;
 
 		this.language2id = Object.create(null);
 		this._lastLanguageId = 0;
@@ -111,14 +111,14 @@ export class Resolver implements RegistryOptions {
 		throw new Error('Could not findGrammarByLanguage for ' + language);
 	}
 
-	public async loadGrammar(scopeName: string): Promise<IRawGrammar | null> {
+	public loadGrammar(scopeName: string): IRawGrammar | null {
 		for (let i = 0; i < this._grammars.length; i++) {
 			let grammar = this._grammars[i];
 			if (grammar.scopeName === scopeName) {
 				if (!grammar.grammar) {
 					grammar.grammar = readGrammarFromPath(grammar.path);
 				}
-				return grammar.grammar;
+				return grammar.grammar
 			}
 		}
 		//console.warn('test resolver: missing grammar for ' + scopeName);
@@ -126,14 +126,7 @@ export class Resolver implements RegistryOptions {
 	}
 }
 
-function readGrammarFromPath(path: string) : Promise<IRawGrammar> {
-	return new Promise((c,e) => {
-		fs.readFile(path, (error, content) => {
-			if (error) {
-				e(error);
-			} else {
-				c(parseRawGrammar(content.toString(), path));
-			}
-		});
-	});
+function readGrammarFromPath(path: string) : IRawGrammar {
+	const content = fs.readFileSync(path);
+	return parseRawGrammar(content.toString(), path)
 }

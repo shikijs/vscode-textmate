@@ -71,7 +71,7 @@ class ThemeInfo {
 	}
 }
 
-(function () {
+(async function () {
 	let THEMES = [
 		new ThemeInfo('abyss', 'Abyss.tmTheme'),
 		new ThemeInfo('dark_vs', 'dark_vs.json'),
@@ -97,7 +97,7 @@ class ThemeInfo {
 
 	let _languages: ILanguageRegistration[] = JSON.parse(fs.readFileSync(path.join(THEMES_TEST_PATH, 'languages.json')).toString('utf8'));
 
-	let _resolver = new Resolver(_grammars, _languages, getOniguruma());
+	let _resolver = new Resolver(_grammars, _languages, await getOniguruma());
 	let _themeData = THEMES.map(theme => theme.create(_resolver));
 
 	// Discover all tests
@@ -115,13 +115,12 @@ class ThemeInfo {
 				await tst.evaluate();
 				assert.deepStrictEqual(tst.actual, tst.expected);
 			} catch(err) {
-				tst.writeExpected();
+				// tst.writeExpected();
 				throw err;
 			}
 		});
 	}
 
-})();
 
 test('Theme matching gives higher priority to deeper matches', () => {
 	const theme = Theme.createFromRawTheme({
@@ -753,3 +752,5 @@ test('Theme resolving issue #35: Trailing comma in a tmTheme scope selector', ()
 
 	assert.deepStrictEqual(actual, expected);
 });
+
+})();

@@ -66,7 +66,7 @@ export class ThemeTest {
 		this.actual = null;
 	}
 
-	public async evaluate(): Promise<any> {
+	public async evaluate(): Promise<void> {
 		await Promise.all(this.tests.map(t => t.evaluate()));
 
 		let actual: IThemesTokens = {};
@@ -108,12 +108,12 @@ class SingleThemeTest {
 		this.actual = null;
 	}
 
-	public async evaluate(): Promise<void> {
-		this.actual = await this._tokenizeWithThemeAsync();
+	public evaluate(): void {
+		this.actual = this._tokenizeWithTheme();
 	}
 
-	private async _tokenizeWithThemeAsync(): Promise<IThemedToken[]> {
-		const grammar = await this.themeData.registry.loadGrammarWithEmbeddedLanguages(this.initialScopeName, this.initialLanguage, this.embeddedLanguages);
+	private _tokenizeWithTheme(): IThemedToken[] {
+		const grammar = this.themeData.registry.loadGrammarWithEmbeddedLanguages(this.initialScopeName, this.initialLanguage, this.embeddedLanguages);
 		if (!grammar) {
 			throw new Error(`Cannot load grammar for ${this.initialScopeName}`);
 		}
