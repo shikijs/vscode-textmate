@@ -13,7 +13,9 @@ import { StackDiff } from './diffStateStacks';
 
 export * from './onigLib';
 
-export type { Theme, IRawThemeSetting } from './theme'
+export { Theme } from './theme'
+
+export type { IRawThemeSetting } from './theme'
 export type { StateStackImpl, StackDiff }
 export type { IRawGrammar, IRawTheme };
 
