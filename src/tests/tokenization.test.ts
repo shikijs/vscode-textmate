@@ -5,11 +5,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as assert from 'assert';
-import { Registry, IGrammar, RegistryOptions, StateStack, parseRawGrammar } from '../main';
+import { Registry, IGrammar, RegistryOptions, StateStack } from '../main';
 import { IOnigLib } from '../onigLib';
 import { getOniguruma } from './onigLibs';
 import { IRawGrammar } from '../rawGrammar';
 import { applyStateStackDiff, diffStateStacksRefEq } from '../diffStateStacks';
+import { parseRawGrammar } from '../parseRawGrammar';
 
 const REPO_ROOT = path.join(__dirname, '../../');
 

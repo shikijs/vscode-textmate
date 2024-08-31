@@ -3,7 +3,7 @@
  *--------------------------------------------------------*/
 
 import { BalancedBracketSelectors, StateStackImpl } from './grammar';
-import * as grammarReader from './parseRawGrammar';
+// import * as grammarReader from './parseRawGrammar';
 import { IOnigLib } from './onigLib';
 import { IRawGrammar } from './rawGrammar';
 import { SyncRegistry } from './registry';
@@ -14,7 +14,9 @@ import { applyStateStackDiff, diffStateStacksRefEq, StackDiff } from './diffStat
 
 export * from './onigLib';
 
-export { IRawGrammar, IRawTheme };
+export type { IRawThemeSetting } from './theme'
+export type { StateStackImpl, StackDiff }
+export type { IRawGrammar, IRawTheme };
 
 /**
  * A registry helper that can locate grammar file paths given scope names.
@@ -265,6 +267,6 @@ export interface StateStack {
 
 export const INITIAL: StateStack = StateStackImpl.NULL;
 
-export const parseRawGrammar: (content: string, filePath?: string) => IRawGrammar = grammarReader.parseRawGrammar;
+// export const parseRawGrammar: (content: string, filePath?: string) => IRawGrammar = grammarReader.parseRawGrammar;
 
-export { diffStateStacksRefEq, applyStateStackDiff, StackDiff, };
+// export { diffStateStacksRefEq, applyStateStackDiff,  };

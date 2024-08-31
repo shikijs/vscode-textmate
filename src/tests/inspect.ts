@@ -3,10 +3,11 @@
  *--------------------------------------------------------*/
 
 import * as fs from 'fs';
-import { Registry, IGrammar, parseRawGrammar } from '../main';
+import { Registry, } from '../main';
 import { StateStackImpl as StackElementImpl, Grammar as GrammarImpl } from '../grammar';
 import * as debug from '../debug';
 import { getOniguruma } from './onigLibs';
+import { parseRawGrammar } from '../parseRawGrammar';
 
 class ExtendedStackElement extends StackElementImpl {
 	_instanceId?: number;
