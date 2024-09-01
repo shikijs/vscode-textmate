@@ -3,7 +3,7 @@
  *--------------------------------------------------------*/
 
 import { DebugFlags } from '../debug';
-import { EncodedTokenAttributes, OptionalStandardTokenType, StandardTokenType, toOptionalTokenType } from '../encodedTokenAttributes';
+import { EncodedTokenMetadata, OptionalStandardTokenType, StandardTokenType, toOptionalTokenType, EncodedTokenAttributes } from '../encodedTokenAttributes';
 import { IEmbeddedLanguagesMap, IGrammar, IToken, ITokenizeLineResult, ITokenizeLineResult2, ITokenTypeMap, StateStack } from '../main';
 import { createMatchers, Matcher } from '../matcher';
 import { disposeOnigString, IOnigLib, OnigScanner, OnigString } from '../onigLib';
@@ -230,14 +230,14 @@ export class Grammar implements IGrammar, IRuleFactoryHelper, IOnigLib {
 		if (this._injections === null) {
 			this._injections = this._collectInjections();
 
-			if (DebugFlags.InDebugMode && this._injections.length > 0) {
-				console.log(
-					`Grammar ${this._rootScopeName} contains the following injections:`
-				);
-				for (const injection of this._injections) {
-					console.log(`  - ${injection.debugSelector}`);
-				}
-			}
+			// if (DebugFlags.InDebugMode && this._injections.length > 0) {
+			// 	console.log(
+			// 		`Grammar ${this._rootScopeName} contains the following injections:`
+			// 	);
+			// 	for (const injection of this._injections) {
+			// 		console.log(`  - ${injection.debugSelector}`);
+			// 	}
+			// }
 		}
 		return this._injections;
 	}
@@ -327,7 +327,7 @@ export class Grammar implements IGrammar, IRuleFactoryHelper, IOnigLib {
 			const rawDefaultMetadata =
 				this._basicScopeAttributesProvider.getDefaultAttributes();
 			const defaultStyle = this.themeProvider.getDefaults();
-			const defaultMetadata = EncodedTokenAttributes.set(
+			const defaultMetadata = EncodedTokenMetadata.set(
 				0,
 				rawDefaultMetadata.languageId,
 				rawDefaultMetadata.tokenType,
@@ -513,7 +513,7 @@ export class AttributedScopeStack {
 			background = styleAttributes.backgroundId;
 		}
 
-		return EncodedTokenAttributes.set(
+		return EncodedTokenMetadata.set(
 			existingTokenAttributes,
 			basicScopeAttributes.languageId,
 			basicScopeAttributes.tokenType,
@@ -1003,7 +1003,7 @@ export class LineTokens {
 				const scopes = scopesList?.getScopeNames() ?? [];
 				for (const tokenType of this._tokenTypeOverrides) {
 					if (tokenType.matcher(scopes)) {
-						metadata = EncodedTokenAttributes.set(
+						metadata = EncodedTokenMetadata.set(
 							metadata,
 							0,
 							toOptionalTokenType(tokenType.type),
@@ -1020,7 +1020,7 @@ export class LineTokens {
 			}
 
 			if (containsBalancedBrackets) {
-				metadata = EncodedTokenAttributes.set(
+				metadata = EncodedTokenMetadata.set(
 					metadata,
 					0,
 					OptionalStandardTokenType.NotSet,
@@ -1037,13 +1037,13 @@ export class LineTokens {
 				return;
 			}
 
-			if (DebugFlags.InDebugMode) {
-				const scopes = scopesList?.getScopeNames() ?? [];
-				console.log('  token: |' + this._lineText!.substring(this._lastTokenEndIndex, endIndex).replace(/\n$/, '\\n') + '|');
-				for (let k = 0; k < scopes.length; k++) {
-					console.log('      * ' + scopes[k]);
-				}
-			}
+			// if (DebugFlags.InDebugMode) {
+			// 	const scopes = scopesList?.getScopeNames() ?? [];
+			// 	console.log('  token: |' + this._lineText!.substring(this._lastTokenEndIndex, endIndex).replace(/\n$/, '\\n') + '|');
+			// 	for (let k = 0; k < scopes.length; k++) {
+			// 		console.log('      * ' + scopes[k]);
+			// 	}
+			// }
 
 			this._binaryTokens.push(this._lastTokenEndIndex);
 			this._binaryTokens.push(metadata);
@@ -1054,12 +1054,12 @@ export class LineTokens {
 
 		const scopes = scopesList?.getScopeNames() ?? [];
 
-		if (DebugFlags.InDebugMode) {
-			console.log('  token: |' + this._lineText!.substring(this._lastTokenEndIndex, endIndex).replace(/\n$/, '\\n') + '|');
-			for (let k = 0; k < scopes.length; k++) {
-				console.log('      * ' + scopes[k]);
-			}
-		}
+		// if (DebugFlags.InDebugMode) {
+		// 	console.log('  token: |' + this._lineText!.substring(this._lastTokenEndIndex, endIndex).replace(/\n$/, '\\n') + '|');
+		// 	for (let k = 0; k < scopes.length; k++) {
+		// 		console.log('      * ' + scopes[k]);
+		// 	}
+		// }
 
 		this._tokens.push({
 			startIndex: this._lastTokenEndIndex,

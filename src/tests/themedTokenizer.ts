@@ -3,7 +3,7 @@
  *--------------------------------------------------------*/
 
 import { IGrammar, StateStack } from '../main';
-import { EncodedTokenAttributes } from '../encodedTokenAttributes';
+import { EncodedTokenMetadata } from '../encodedTokenAttributes';
 import { applyStateStackDiff, diffStateStacksRefEq } from '../diffStateStacks';
 
 export interface IThemedToken {
@@ -30,7 +30,7 @@ export function tokenizeWithTheme(colorMap: string[], fileContents: string, gram
 				continue;
 			}
 			const metadata = result.tokens[2 * j + 1];
-			const foreground = EncodedTokenAttributes.getForeground(metadata);
+			const foreground = EncodedTokenMetadata.getForeground(metadata);
 			const foregroundColor = colorMap[foreground];
 
 			actual[actualLen++] = {

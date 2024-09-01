@@ -17,7 +17,6 @@ import {
 import { ThemeTest } from './themeTest';
 import { getOniguruma } from './onigLibs';
 import { Resolver, IGrammarRegistration, ILanguageRegistration } from './resolver';
-import { EncodedTokenAttributes } from '../encodedTokenAttributes';
 import { strArrCmp, strcmp } from '../utils';
 import { parsePLIST } from '../plist';
 

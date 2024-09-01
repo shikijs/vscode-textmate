@@ -19,6 +19,8 @@ export type { IRawThemeSetting } from './theme'
 export type { StateStackImpl, StackDiff }
 export type { IRawGrammar, IRawTheme };
 
+export { EncodedTokenMetadata } from './encodedTokenAttributes'
+
 /**
  * A registry helper that can locate grammar file paths given scope names.
  */

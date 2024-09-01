@@ -90,9 +90,9 @@ class TokenizeStringResult {
 		);
 
 		if (!r) {
-			if (DebugFlags.InDebugMode) {
-				console.log("  no more matches.");
-			}
+			// if (DebugFlags.InDebugMode) {
+			// 	console.log("  no more matches.");
+			// }
 			// No match
 			lineTokens.produce(stack, lineLength);
 			STOP = true;
@@ -438,24 +438,24 @@ function matchRule(grammar: Grammar, lineText: OnigString, isFirstLine: boolean,
 	const rule = stack.getRule(grammar);
 	const { ruleScanner, findOptions } = prepareRuleSearch(rule, grammar, stack.endRule, isFirstLine, linePos === anchorPosition);
 
-	let perfStart = 0;
-	if (DebugFlags.InDebugMode) {
-		perfStart = performanceNow();
-	}
+	// let perfStart = 0;
+	// if (DebugFlags.InDebugMode) {
+	// 	perfStart = performanceNow();
+	// }
 
 	const r = ruleScanner.findNextMatchSync(lineText, linePos, findOptions);
 
-	if (DebugFlags.InDebugMode) {
-		const elapsedMillis = performanceNow() - perfStart;
-		if (elapsedMillis > 5) {
-			console.warn(`Rule ${rule.debugName} (${rule.id}) matching took ${elapsedMillis} against '${lineText}'`);
-		}
-		console.log(`  scanning for (linePos: ${linePos}, anchorPosition: ${anchorPosition})`);
-		console.log(ruleScanner.toString());
-		if (r) {
-			console.log(`matched rule id: ${r.ruleId} from ${r.captureIndices[0].start} to ${r.captureIndices[0].end}`);
-		}
-	}
+	// if (DebugFlags.InDebugMode) {
+	// 	const elapsedMillis = performanceNow() - perfStart;
+	// 	if (elapsedMillis > 5) {
+	// 		console.warn(`Rule ${rule.debugName} (${rule.id}) matching took ${elapsedMillis} against '${lineText}'`);
+	// 	}
+	// 	console.log(`  scanning for (linePos: ${linePos}, anchorPosition: ${anchorPosition})`);
+	// 	console.log(ruleScanner.toString());
+	// 	if (r) {
+	// 		console.log(`matched rule id: ${r.ruleId} from ${r.captureIndices[0].start} to ${r.captureIndices[0].end}`);
+	// 	}
+	// }
 
 	if (r) {
 		return {

@@ -3,19 +3,19 @@
  *--------------------------------------------------------*/
 
 import * as assert from 'assert';
-import { EncodedTokenAttributes, OptionalStandardTokenType, StandardTokenType } from '../encodedTokenAttributes';
+import { EncodedTokenMetadata, OptionalStandardTokenType, StandardTokenType } from '../encodedTokenAttributes';
 import { Registry } from '../main';
 import { FontStyle } from '../theme';
 import { getOniguruma } from './onigLibs';
 
 function assertEquals(metadata: number, languageId: number, tokenType: StandardTokenType, containsBalancedBrackets: boolean, fontStyle: FontStyle, foreground: number, background: number): void {
 	const actual = {
-		languageId: EncodedTokenAttributes.getLanguageId(metadata),
-		tokenType: EncodedTokenAttributes.getTokenType(metadata),
-		containsBalancedBrackets: EncodedTokenAttributes.containsBalancedBrackets(metadata),
-		fontStyle: EncodedTokenAttributes.getFontStyle(metadata),
-		foreground: EncodedTokenAttributes.getForeground(metadata),
-		background: EncodedTokenAttributes.getBackground(metadata),
+		languageId: EncodedTokenMetadata.getLanguageId(metadata),
+		tokenType: EncodedTokenMetadata.getTokenType(metadata),
+		containsBalancedBrackets: EncodedTokenMetadata.containsBalancedBrackets(metadata),
+		fontStyle: EncodedTokenMetadata.getFontStyle(metadata),
+		foreground: EncodedTokenMetadata.getForeground(metadata),
+		background: EncodedTokenMetadata.getBackground(metadata),
 	};
 
 	const expected = {
@@ -27,70 +27,70 @@ function assertEquals(metadata: number, languageId: number, tokenType: StandardT
 		background,
 	};
 
-	assert.deepStrictEqual(actual, expected, 'equals for ' + EncodedTokenAttributes.toBinaryStr(metadata));
+	assert.deepStrictEqual(actual, expected, 'equals for ' + EncodedTokenMetadata.toBinaryStr(metadata));
 }
 
 test('StackElementMetadata works', () => {
-	let value = EncodedTokenAttributes.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
+	let value = EncodedTokenMetadata.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 });
 
 test('StackElementMetadata can overwrite languageId', () => {
-	let value = EncodedTokenAttributes.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
+	let value = EncodedTokenMetadata.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 
-	value = EncodedTokenAttributes.set(value, 2, OptionalStandardTokenType.NotSet, false, FontStyle.NotSet, 0, 0);
+	value = EncodedTokenMetadata.set(value, 2, OptionalStandardTokenType.NotSet, false, FontStyle.NotSet, 0, 0);
 	assertEquals(value, 2, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 });
 
 test('StackElementMetadata can overwrite tokenType', () => {
-	let value = EncodedTokenAttributes.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
+	let value = EncodedTokenMetadata.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 
-	value = EncodedTokenAttributes.set(value, 0, OptionalStandardTokenType.Comment, false, FontStyle.NotSet, 0, 0);
+	value = EncodedTokenMetadata.set(value, 0, OptionalStandardTokenType.Comment, false, FontStyle.NotSet, 0, 0);
 	assertEquals(value, 1, StandardTokenType.Comment, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 });
 
 test('StackElementMetadata can overwrite font style', () => {
-	let value = EncodedTokenAttributes.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
+	let value = EncodedTokenMetadata.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 
-	value = EncodedTokenAttributes.set(value, 0, OptionalStandardTokenType.NotSet, false, FontStyle.None, 0, 0);
+	value = EncodedTokenMetadata.set(value, 0, OptionalStandardTokenType.NotSet, false, FontStyle.None, 0, 0);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.None, 101, 102);
 });
 
 test('StackElementMetadata can overwrite font style with strikethrough', () => {
-	let value = EncodedTokenAttributes.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Strikethrough, 101, 102);
+	let value = EncodedTokenMetadata.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Strikethrough, 101, 102);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Strikethrough, 101, 102);
 
-	value = EncodedTokenAttributes.set(value, 0, OptionalStandardTokenType.NotSet, false, FontStyle.None, 0, 0);
+	value = EncodedTokenMetadata.set(value, 0, OptionalStandardTokenType.NotSet, false, FontStyle.None, 0, 0);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.None, 101, 102);
 });
 
 test('StackElementMetadata can overwrite foreground', () => {
-	let value = EncodedTokenAttributes.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
+	let value = EncodedTokenMetadata.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 
-	value = EncodedTokenAttributes.set(value, 0, OptionalStandardTokenType.NotSet, false, FontStyle.NotSet, 5, 0);
+	value = EncodedTokenMetadata.set(value, 0, OptionalStandardTokenType.NotSet, false, FontStyle.NotSet, 5, 0);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 5, 102);
 });
 
 test('StackElementMetadata can overwrite background', () => {
-	let value = EncodedTokenAttributes.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
+	let value = EncodedTokenMetadata.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 
-	value = EncodedTokenAttributes.set(value, 0, OptionalStandardTokenType.NotSet, false, FontStyle.NotSet, 0, 7);
+	value = EncodedTokenMetadata.set(value, 0, OptionalStandardTokenType.NotSet, false, FontStyle.NotSet, 0, 7);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 7);
 });
 
 test('StackElementMetadata can overwrite balanced backet bit', () => {
-	let value = EncodedTokenAttributes.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
+	let value = EncodedTokenMetadata.set(0, 1, OptionalStandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 
-	value = EncodedTokenAttributes.set(value, 0, OptionalStandardTokenType.NotSet, true, FontStyle.NotSet, 0, 0);
+	value = EncodedTokenMetadata.set(value, 0, OptionalStandardTokenType.NotSet, true, FontStyle.NotSet, 0, 0);
 	assertEquals(value, 1, StandardTokenType.RegEx, true, FontStyle.Underline | FontStyle.Bold, 101, 102);
 
-	value = EncodedTokenAttributes.set(value, 0, OptionalStandardTokenType.NotSet, false, FontStyle.NotSet, 0, 0);
+	value = EncodedTokenMetadata.set(value, 0, OptionalStandardTokenType.NotSet, false, FontStyle.NotSet, 0, 0);
 	assertEquals(value, 1, StandardTokenType.RegEx, false, FontStyle.Underline | FontStyle.Bold, 101, 102);
 });
 
@@ -101,7 +101,7 @@ test('StackElementMetadata can work at max values', () => {
 	const maxForeground = 511;
 	const maxBackground = 254;
 
-	let value = EncodedTokenAttributes.set(0, maxLangId, maxTokenType, true, maxFontStyle, maxForeground, maxBackground);
+	let value = EncodedTokenMetadata.set(0, maxLangId, maxTokenType, true, maxFontStyle, maxForeground, maxBackground);
 	assertEquals(value, maxLangId, maxTokenType, true, maxFontStyle, maxForeground, maxBackground);
 });
 

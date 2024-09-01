@@ -6,17 +6,17 @@ import { FontStyle } from "./theme";
 
 export type EncodedTokenAttributes = number;
 
-export namespace EncodedTokenAttributes {
-	export function toBinaryStr(encodedTokenAttributes: EncodedTokenAttributes): string {
+export class EncodedTokenMetadata {
+	static toBinaryStr(encodedTokenAttributes: EncodedTokenAttributes): string {
 		return encodedTokenAttributes.toString(2).padStart(32, "0");
 	}
 
-	export function print(encodedTokenAttributes: EncodedTokenAttributes): void {
-		const languageId = EncodedTokenAttributes.getLanguageId(encodedTokenAttributes);
-		const tokenType = EncodedTokenAttributes.getTokenType(encodedTokenAttributes);
-		const fontStyle = EncodedTokenAttributes.getFontStyle(encodedTokenAttributes);
-		const foreground = EncodedTokenAttributes.getForeground(encodedTokenAttributes);
-		const background = EncodedTokenAttributes.getBackground(encodedTokenAttributes);
+	static print(encodedTokenAttributes: EncodedTokenAttributes): void {
+		const languageId = EncodedTokenMetadata.getLanguageId(encodedTokenAttributes);
+		const tokenType = EncodedTokenMetadata.getTokenType(encodedTokenAttributes);
+		const fontStyle = EncodedTokenMetadata.getFontStyle(encodedTokenAttributes);
+		const foreground = EncodedTokenMetadata.getForeground(encodedTokenAttributes);
+		const background = EncodedTokenMetadata.getBackground(encodedTokenAttributes);
 
 		console.log({
 			languageId: languageId,
@@ -27,39 +27,39 @@ export namespace EncodedTokenAttributes {
 		});
 	}
 
-	export function getLanguageId(encodedTokenAttributes: EncodedTokenAttributes): number {
+	static getLanguageId(encodedTokenAttributes: EncodedTokenAttributes): number {
 		return (
 			(encodedTokenAttributes & EncodedTokenDataConsts.LANGUAGEID_MASK) >>>
 			EncodedTokenDataConsts.LANGUAGEID_OFFSET
 		);
 	}
 
-	export function getTokenType(encodedTokenAttributes: EncodedTokenAttributes): StandardTokenType {
+	static getTokenType(encodedTokenAttributes: EncodedTokenAttributes): StandardTokenType {
 		return (
 			(encodedTokenAttributes & EncodedTokenDataConsts.TOKEN_TYPE_MASK) >>>
 			EncodedTokenDataConsts.TOKEN_TYPE_OFFSET
 		);
 	}
 
-	export function containsBalancedBrackets(encodedTokenAttributes: EncodedTokenAttributes): boolean {
+	static containsBalancedBrackets(encodedTokenAttributes: EncodedTokenAttributes): boolean {
 		return (encodedTokenAttributes & EncodedTokenDataConsts.BALANCED_BRACKETS_MASK) !== 0;
 	}
 
-	export function getFontStyle(encodedTokenAttributes: EncodedTokenAttributes): number {
+	static getFontStyle(encodedTokenAttributes: EncodedTokenAttributes): number {
 		return (
 			(encodedTokenAttributes & EncodedTokenDataConsts.FONT_STYLE_MASK) >>>
 			EncodedTokenDataConsts.FONT_STYLE_OFFSET
 		);
 	}
 
-	export function getForeground(encodedTokenAttributes: EncodedTokenAttributes): number {
+	static getForeground(encodedTokenAttributes: EncodedTokenAttributes): number {
 		return (
 			(encodedTokenAttributes & EncodedTokenDataConsts.FOREGROUND_MASK) >>>
 			EncodedTokenDataConsts.FOREGROUND_OFFSET
 		);
 	}
 
-	export function getBackground(encodedTokenAttributes: EncodedTokenAttributes): number {
+	static getBackground(encodedTokenAttributes: EncodedTokenAttributes): number {
 		return (
 			(encodedTokenAttributes & EncodedTokenDataConsts.BACKGROUND_MASK) >>>
 			EncodedTokenDataConsts.BACKGROUND_OFFSET
@@ -70,7 +70,7 @@ export namespace EncodedTokenAttributes {
 	 * Updates the fields in `metadata`.
 	 * A value of `0`, `NotSet` or `null` indicates that the corresponding field should be left as is.
 	 */
-	export function set(
+	static set(
 		encodedTokenAttributes: EncodedTokenAttributes,
 		languageId: number | 0,
 		tokenType: OptionalStandardTokenType | OptionalStandardTokenType.NotSet,
@@ -79,13 +79,12 @@ export namespace EncodedTokenAttributes {
 		foreground: number | 0,
 		background: number | 0
 	): number {
-		let _languageId = EncodedTokenAttributes.getLanguageId(encodedTokenAttributes);
-		let _tokenType = EncodedTokenAttributes.getTokenType(encodedTokenAttributes);
-		let _containsBalancedBracketsBit: 0 | 1 =
-			EncodedTokenAttributes.containsBalancedBrackets(encodedTokenAttributes) ? 1 : 0;
-		let _fontStyle = EncodedTokenAttributes.getFontStyle(encodedTokenAttributes);
-		let _foreground = EncodedTokenAttributes.getForeground(encodedTokenAttributes);
-		let _background = EncodedTokenAttributes.getBackground(encodedTokenAttributes);
+		let _languageId = EncodedTokenMetadata.getLanguageId(encodedTokenAttributes);
+		let _tokenType = EncodedTokenMetadata.getTokenType(encodedTokenAttributes);
+		let _containsBalancedBracketsBit: 0 | 1 = EncodedTokenMetadata.containsBalancedBrackets(encodedTokenAttributes) ? 1 : 0;
+		let _fontStyle = EncodedTokenMetadata.getFontStyle(encodedTokenAttributes);
+		let _foreground = EncodedTokenMetadata.getForeground(encodedTokenAttributes);
+		let _background = EncodedTokenMetadata.getBackground(encodedTokenAttributes);
 
 		if (languageId !== 0) {
 			_languageId = languageId;
