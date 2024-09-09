@@ -8,12 +8,12 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/main.mjs",
-      "types": "./dist/main.d.mts"
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
     }
   },
-  "main": "./dist/main.mjs",
-  "types": "./dist/main.d.mts",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "repository": {
     "type": "git",
     "url": "https://github.com/shikijs/vscode-textmate"
