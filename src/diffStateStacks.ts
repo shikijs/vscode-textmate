@@ -3,7 +3,7 @@
  *--------------------------------------------------------*/
 
 import { StateStackImpl, StateStackFrame } from "./grammar";
-import { StateStack } from "./main";
+import { StateStack } from ".";
 
 export function diffStateStacksRefEq(first: StateStack, second: StateStack): StackDiff {
 	let pops = 0;

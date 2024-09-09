@@ -5,7 +5,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as assert from 'assert';
-import { Registry } from '../main';
+import { Registry } from '..';
 import {
 	Theme, ThemeTrieElement, ThemeTrieElementRule,
 	parseTheme, ParsedThemeRule, FontStyle, ColorMap,

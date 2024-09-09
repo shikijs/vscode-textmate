@@ -4,7 +4,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { IEmbeddedLanguagesMap } from '../main';
+import { IEmbeddedLanguagesMap } from '..';
 import { tokenizeWithTheme, IThemedToken } from './themedTokenizer';
 import { ThemeData } from './themes.test';
 import { Resolver } from './resolver';

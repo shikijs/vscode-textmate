@@ -3,7 +3,7 @@
  *--------------------------------------------------------*/
 
 import * as fs from 'fs';
-import { Registry, } from '../main';
+import { Registry } from '..';
 import { StateStackImpl as StackElementImpl, Grammar as GrammarImpl } from '../grammar';
 import * as debug from '../debug';
 import { getOniguruma } from './onigLibs';

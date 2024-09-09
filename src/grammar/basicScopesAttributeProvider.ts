@@ -3,7 +3,7 @@
  *--------------------------------------------------------*/
 
 import { OptionalStandardTokenType } from "../encodedTokenAttributes";
-import { IEmbeddedLanguagesMap } from "../main";
+import { IEmbeddedLanguagesMap } from "..";
 import { ScopeName } from "../theme";
 import { CachedFn, escapeRegExpCharacters } from "../utils";
 

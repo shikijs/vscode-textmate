@@ -2,7 +2,7 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
 
-import { IGrammar, StateStack } from '../main';
+import { IGrammar, StateStack } from '..';
 import { EncodedTokenMetadata } from '../encodedTokenAttributes';
 import { applyStateStackDiff, diffStateStacksRefEq } from '../diffStateStacks';
 

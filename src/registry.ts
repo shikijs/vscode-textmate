@@ -4,7 +4,7 @@
 
 import { BalancedBracketSelectors, createGrammar, Grammar, IGrammarRepository, IThemeProvider, AttributedScopeStack } from './grammar';
 import { IRawGrammar } from './rawGrammar';
-import { IGrammar, IEmbeddedLanguagesMap, ITokenTypeMap } from './main';
+import { IGrammar, IEmbeddedLanguagesMap, ITokenTypeMap } from '.';
 import { ScopeStack, Theme, StyleAttributes, ScopeName } from './theme';
 import { IOnigLib } from './onigLib';
 

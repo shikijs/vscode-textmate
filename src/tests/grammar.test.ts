@@ -4,7 +4,7 @@
 
 import * as assert from 'assert';
 import { EncodedTokenMetadata, OptionalStandardTokenType, StandardTokenType } from '../encodedTokenAttributes';
-import { Registry } from '../main';
+import { Registry } from '..';
 import { FontStyle } from '../theme';
 import { getOniguruma } from './onigLibs';
 

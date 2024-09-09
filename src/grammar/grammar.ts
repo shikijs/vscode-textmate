@@ -4,7 +4,7 @@
 
 import { DebugFlags } from '../debug';
 import { EncodedTokenMetadata, OptionalStandardTokenType, StandardTokenType, toOptionalTokenType, EncodedTokenAttributes } from '../encodedTokenAttributes';
-import { IEmbeddedLanguagesMap, IGrammar, IToken, ITokenizeLineResult, ITokenizeLineResult2, ITokenTypeMap, StateStack } from '../main';
+import { IEmbeddedLanguagesMap, IGrammar, IToken, ITokenizeLineResult, ITokenizeLineResult2, ITokenTypeMap, StateStack } from '..';
 import { createMatchers, Matcher } from '../matcher';
 import { disposeOnigString, IOnigLib, OnigScanner, OnigString } from '../onigLib';
 import { IRawGrammar, IRawRepository, IRawRule } from '../rawGrammar';

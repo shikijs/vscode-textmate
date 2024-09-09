@@ -5,7 +5,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as assert from 'assert';
-import { Registry, IGrammar, RegistryOptions, StateStack } from '../main';
+import { Registry, IGrammar, RegistryOptions, StateStack } from '..';
 import { IOnigLib } from '../onigLib';
 import { getOniguruma } from './onigLibs';
 import { IRawGrammar } from '../rawGrammar';

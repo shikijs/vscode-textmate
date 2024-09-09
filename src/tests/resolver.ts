@@ -4,7 +4,7 @@
 
 import { IOnigLib } from '../onigLib';
 import { parseRawGrammar } from '../parseRawGrammar';
-import { RegistryOptions } from '../main';
+import { RegistryOptions } from '..';
 
 import * as path from 'path';
 import * as fs from 'fs';

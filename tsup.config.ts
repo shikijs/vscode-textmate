@@ -4,7 +4,7 @@ import { promises as fs } from 'fs'
 export default defineConfig({
   dts: true,
   clean: true,
-  entry: ['src/main.ts'],
+  entry: ['src/index.ts'],
   format: ['esm'],
   esbuildPlugins: [
     {
