@@ -30,8 +30,6 @@ export type RegExpString = string;
 
 export interface IRawRepositoryMap {
 	[name: string]: IRawRule;
-	$self: IRawRule;
-	$base: IRawRule;
 }
 
 export type IRawRepository = IRawRepositoryMap & ILocatable;
