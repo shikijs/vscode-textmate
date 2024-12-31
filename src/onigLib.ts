@@ -2,10 +2,11 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
 
+import { RegExpString } from "./rawGrammar";
 import { OrMask } from "./utils";
 
 export interface IOnigLib {
-	createOnigScanner(sources: string[]): OnigScanner;
+	createOnigScanner(sources: RegExpString[]): OnigScanner;
 	createOnigString(str: string): OnigString;
 }
 

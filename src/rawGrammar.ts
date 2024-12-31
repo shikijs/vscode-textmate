@@ -26,7 +26,7 @@ export interface IRawGrammar extends ILocatable {
  * * base, e.g. `$base`
  */
 export type IncludeString = string;
-export type RegExpString = string;
+export type RegExpString = string | RegExp;
 
 export interface IRawRepositoryMap {
 	[name: string]: IRawRule;
