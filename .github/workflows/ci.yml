@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: lts/*
 
+      - run: pnpm install
       - run: pnpm run build
       - run: pnpm run typecheck
       - run: pnpm run test
