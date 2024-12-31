@@ -27,8 +27,6 @@
   },
   "scripts": {
     "build": "tsup",
-    "watch": "tsc --watch",
-    "compile": "tsc",
     "test": "mocha --ui=tdd ./out/tests/all.test.js",
     "benchmark": "node benchmark/benchmark.js",
     "inspect": "node out/tests/inspect.js",
