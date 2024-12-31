@@ -1,5 +1,4 @@
-const fs = require('fs');
-
+import { readFileSync } from 'fs';
 
 if (process.argv.length < 3) {
 	console.log('usage: node index.js <mainGrammarPath>');
@@ -7,7 +6,7 @@ if (process.argv.length < 3) {
 }
 
 const GRAMMAR_PATH = process.argv[process.argv.length - 1];
-let contents = JSON.parse(fs.readFileSync(GRAMMAR_PATH).toString());
+let contents = JSON.parse(readFileSync(GRAMMAR_PATH).toString());
 delete contents['information_for_contributors'];
 delete contents['version'];
 delete contents['name'];

@@ -11,8 +11,9 @@ import { getOniguruma } from './onigLibs';
 import { IRawGrammar } from '../rawGrammar';
 import { applyStateStackDiff, diffStateStacksRefEq } from '../diffStateStacks';
 import { parseRawGrammar } from '../parseRawGrammar';
+import { fileURLToPath } from 'url';
 
-const REPO_ROOT = path.join(__dirname, '../../');
+const REPO_ROOT = fileURLToPath(new URL('../../', import.meta.url));
 
 function assertTokenizationSuite(testLocation: string): void {
 

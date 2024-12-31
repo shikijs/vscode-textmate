@@ -2,14 +2,15 @@
 	"compilerOptions": {
 		"target": "es2022",
 		"module": "ESNext",
+		"outDir": "out",
 		"moduleResolution": "bundler",
-		"noEmit": true,
 		"noImplicitAny": true,
 		"sourceMap": true,
 		"declaration": true,
 		"strict": true,
 		"lib": [
-			"es2022"
+			"es2022",
+			"DOM"
 		]
 	},
 	"include": [

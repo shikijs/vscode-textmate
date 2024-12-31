@@ -19,9 +19,9 @@ import { getOniguruma } from './onigLibs';
 import { Resolver, IGrammarRegistration, ILanguageRegistration } from './resolver';
 import { strArrCmp, strcmp } from '../utils';
 import { parsePLIST } from '../plist';
+import { fileURLToPath } from 'url';
 
-const THEMES_TEST_PATH = path.join(__dirname, '../../test-cases/themes');
-
+const THEMES_TEST_PATH = fileURLToPath(new URL('../../test-cases/themes', import.meta.url));
 
 export interface ThemeData {
 	themeName: string;
