@@ -12,6 +12,9 @@ function doClone(something: any): any {
 	if (Array.isArray(something)) {
 		return cloneArray(something);
 	}
+	if (something instanceof RegExp) {
+		return something;
+	}
 	if (typeof something === 'object') {
 		return cloneObj(something);
 	}

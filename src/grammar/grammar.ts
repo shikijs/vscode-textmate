@@ -7,7 +7,7 @@ import { EncodedTokenMetadata, OptionalStandardTokenType, StandardTokenType, toO
 import { IEmbeddedLanguagesMap, IGrammar, IToken, ITokenizeLineResult, ITokenizeLineResult2, ITokenTypeMap, StateStack } from '..';
 import { createMatchers, Matcher } from '../matcher';
 import { disposeOnigString, IOnigLib, OnigScanner, OnigString } from '../onigLib';
-import { IRawGrammar, IRawRepository, IRawRule } from '../rawGrammar';
+import { IRawGrammar, IRawRepository, IRawRule, RegExpString } from '../rawGrammar';
 import { ruleIdFromNumber, IRuleFactoryHelper, IRuleRegistry, Rule, RuleFactory, RuleId, ruleIdToNumber } from '../rule';
 import { FontStyle, ScopeName, ScopePath, ScopeStack, StyleAttributes } from '../theme';
 import { clone } from '../utils';
@@ -153,7 +153,7 @@ export class Grammar implements IGrammar, IRuleFactoryHelper, IOnigLib {
 		}
 	}
 
-	public createOnigScanner(sources: string[]): OnigScanner {
+	public createOnigScanner(sources: RegExpString[]): OnigScanner {
 		return this._onigLib.createOnigScanner(sources);
 	}
 
