@@ -57,9 +57,9 @@ export interface IGrammarConfiguration {
  * The registry that will hold all grammars.
  */
 export class Registry {
-	private readonly _options: RegistryOptions;
-	private readonly _syncRegistry: SyncRegistry;
-	private readonly _ensureGrammarCache: Map<string, boolean>;
+	readonly _options: RegistryOptions;
+	readonly _syncRegistry: SyncRegistry;
+	readonly _ensureGrammarCache: Map<string, boolean>;
 
 	constructor(options: RegistryOptions) {
 		this._options = options;

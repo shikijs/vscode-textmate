@@ -9,10 +9,10 @@ import { ScopeStack, Theme, StyleAttributes, ScopeName } from './theme';
 import { IOnigLib } from './onigLib';
 
 export class SyncRegistry implements IGrammarRepository, IThemeProvider {
-	private readonly _grammars = new Map<ScopeName, Grammar>();
-	private readonly _rawGrammars = new Map<ScopeName, IRawGrammar>();
-	private readonly _injectionGrammars = new Map<ScopeName, ScopeName[]>();
-	private _theme: Theme;
+	readonly _grammars = new Map<ScopeName, Grammar>();
+	readonly _rawGrammars = new Map<ScopeName, IRawGrammar>();
+	readonly _injectionGrammars = new Map<ScopeName, ScopeName[]>();
+	_theme: Theme;
 
 	constructor(theme: Theme, private readonly _onigLib: IOnigLib) {
 		this._theme = theme;
