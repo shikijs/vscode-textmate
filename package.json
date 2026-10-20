@@ -1,6 +1,6 @@
 {
   "name": "@shikijs/vscode-textmate",
-  "version": "10.0.2",
+  "version": "10.1.0",
   "type": "module",
   "packageManager": "pnpm@12.14.0",
   "description": "Shiki's fork of `vscode-textmate`",
