@@ -1,12 +1,13 @@
-const path = require('path');
-const fs = require('fs');
-const main = require('../release/main');
-const onigLibs = require('../out/tests/onigLibs');
-const { parseRawGrammar } = require('../out/parseRawGrammar');
+import path from 'node:path';
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { Registry } from '../src/index';
+import { parseRawGrammar } from '../src/parseRawGrammar';
+import * as onigLibs from '../src/tests/onigLibs';
 
-const Registry = main.Registry;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const onigurumaRegistry = new Registry({ loadGrammar, onigLib: onigLibs.getOniguruma()});
+const onigurumaRegistry = new Registry({ loadGrammar, onigLib: await onigLibs.getOniguruma() });
 
 function tokenize(grammar, content) {
 	const start = Date.now();
@@ -22,7 +23,7 @@ async function tokenizeFile(filePath, scope, message) {
 	const content = fs.readFileSync(filePath, 'utf8')
 	const lines = content.split(/\r\n|\r|\n/);
 
-	let onigurumaGrammar  = await onigurumaRegistry.loadGrammar(scope);
+	let onigurumaGrammar  = onigurumaRegistry.loadGrammar(scope);
 	let onigurumaTime = tokenize(onigurumaGrammar, lines);
 
 	console.log();
@@ -44,7 +45,7 @@ function loadGrammar(scopeName) {
 	} else {
 		return null;
 	}
-	return Promise.resolve(parseRawGrammar(fs.readFileSync(grammarPath).toString(), grammarPath));
+	return parseRawGrammar(fs.readFileSync(grammarPath).toString(), grammarPath);
 }
 
 async function test() {

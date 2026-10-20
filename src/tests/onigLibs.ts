@@ -4,9 +4,12 @@
 
 import { IOnigLib } from '../onigLib';
 import { RegExpString } from '../rawGrammar';
-import vscodeOnigurumaModule from 'vscode-oniguruma';
+import * as vscodeOniguruma from 'vscode-oniguruma';
 import fs from 'fs'
 import { fileURLToPath } from 'url';
+
+// CJS bundle: depending on the loader, the exports live on the namespace or on `default`
+const vscodeOnigurumaModule: typeof vscodeOniguruma = (vscodeOniguruma as any).default ?? vscodeOniguruma;
 
 let onigurumaLib: Promise<IOnigLib> | null = null;
 

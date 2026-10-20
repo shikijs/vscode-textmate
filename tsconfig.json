@@ -8,6 +8,10 @@
 		"sourceMap": true,
 		"declaration": true,
 		"strict": true,
+		"types": [
+			"node",
+			"mocha"
+		],
 		"lib": [
 			"es2022",
 			"DOM"

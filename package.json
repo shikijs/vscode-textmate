@@ -2,7 +2,7 @@
   "name": "@shikijs/vscode-textmate",
   "version": "10.0.2",
   "type": "module",
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@12.14.0",
   "description": "Shiki's fork of `vscode-textmate`",
   "author": {
     "name": "Microsoft Corporation"
@@ -26,23 +26,23 @@
   "scripts": {
     "build": "tsup",
     "test": "mocha --ui=tdd ./src/tests/all.test.ts",
-    "benchmark": "node benchmark/benchmark.js",
+    "benchmark": "tsx benchmark/benchmark.js",
     "inspect": "tsx src/tests/inspect.ts",
     "typecheck": "tsc --noEmit",
     "tmconvert": "node scripts/tmconvert.js",
-    "version": "npm run compile && npm run test",
+    "version": "pnpm build && pnpm test",
     "postversion": "git push && git push --tags",
     "prepublishOnly": "npm run build",
     "release": "bumpp && pnpm publish"
   },
   "devDependencies": {
-    "@types/mocha": "^9.1.1",
-    "@types/node": "^16.18.121",
-    "bumpp": "^9.9.0",
-    "mocha": "^9.2.2",
-    "tsup": "^8.3.5",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2",
-    "vscode-oniguruma": "^1.7.0"
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^26.6.5",
+    "bumpp": "^12.3.0",
+    "mocha": "^12.0.3",
+    "tsup": "^9.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vscode-oniguruma": "^2.0.1"
   }
 }
